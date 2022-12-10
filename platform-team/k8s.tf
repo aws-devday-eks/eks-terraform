@@ -24,7 +24,7 @@ module "eks_blueprints" {
   managed_node_groups = {
     mg_5 = {
       node_group_name = local.node_group_name
-      instance_types  = ["m5.xlarge"]
+      instance_types  = ["m5.large"]
       subnet_ids      = module.vpc.private_subnets
     }
   }
@@ -53,7 +53,7 @@ module "eks_blueprints" {
         "requests.memory" = "20Gi",
         "limits.cpu"      = "20000m",
         "limits.memory"   = "50Gi",
-        "pods"            = "15",
+        "pods"            = "50",
         "secrets"         = "50",
         "services"        = "50"
       }

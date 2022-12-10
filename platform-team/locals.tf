@@ -24,7 +24,7 @@ locals {
   #---------------------------------------------------------------
 
   workload_application = {
-    path               = "envs/dev"
+    path               = "charts"
     repo_url           = "https://github.com/badal-deep-shared/eks-blueprints-workloads.git"
     add_on_application = false
   }
