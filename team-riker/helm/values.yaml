@@ -1,0 +1,30 @@
+# Application Name
+name: "argocd-main"
+
+# The ArgoCD Project the Application belongs to.
+project: "default"
+
+# Source config for the Application
+source:
+  # Git Repo the Application points to.
+  repoUrl: "https://github.com/aws-cpg-deep/eks-blueprints-add-ons"
+
+  # Target revision for the repo.
+  targetRevision: "HEAD"
+
+  # Path in the repo Argo should look for manifests.
+  path: "chart"
+
+  # Helm configuration.
+  helm:
+    values: ""
+
+# Destination cluster.
+destination:
+  server: "https://kubernetes.default.svc"
+
+ignoreDifferences:
+#  - group: argoproj.io
+#    kind: Application
+#    jsonPointers:
+#      - /spec/syncPolicy

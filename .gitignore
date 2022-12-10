@@ -1,0 +1,4 @@
+**.terraform**
+.idea/
+platform-team/.terraform/*
+**/.terraform/**
