@@ -29,11 +29,22 @@ module "kubernetes_addons" {
   # https://aws-ia.github.io/terraform-aws-eks-blueprints/add-ons/
   #---------------------------------------------------------------
 
-
   enable_aws_load_balancer_controller  = true
   enable_karpenter                     = true
   enable_amazon_eks_aws_ebs_csi_driver = true
-  enable_aws_for_fluentbit             = true
+  enable_aws_for_fluentbit              = true
   enable_metrics_server                = true
+  enable_prometheus                    = true
+  enable_amazon_prometheus             = true
 
+  enable_argo_rollouts                  = true
+}
+
+module "managed_prometheus" {
+  source  = "terraform-aws-modules/managed-service-prometheus/aws"
+  version = "~> 2.1"
+
+  workspace_alias = "${local.name}-prom"
+
+  tags = local.tags
 }
