@@ -39,6 +39,11 @@ module "cloud9_vpc" {
   single_nat_gateway   = true
   enable_dns_hostnames = true
 
+  private_subnet_tags = {
+    "kubernetes.io/cluster/${local.vpc_name}" = "shared"
+    "kubernetes.io/role/internal-elb"         = 1
+  }
+
   # Manage so we can name
   manage_default_network_acl    = true
   default_network_acl_tags      = { Name = "${local.cloud9_vpc_name}-default" }
@@ -57,7 +62,7 @@ module "cloud9_vpc" {
 #   name = local.vpc_name
 #   cidr = local.vpc_cidr
 #   azs  = local.azs
-  
+
 #   enable_nat_gateway   = true
 #   single_nat_gateway   = true
 
@@ -111,7 +116,7 @@ module "vpc_endpoints_sg" {
   name        = "${local.vpc_name}-vpc-endpoints"
   description = "Security group for VPC endpoint access"
   vpc_id      = module.cloud9_vpc.vpc_id
-  
+
 
   ingress_with_cidr_blocks = [
     {
