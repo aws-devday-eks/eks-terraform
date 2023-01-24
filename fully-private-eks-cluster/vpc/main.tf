@@ -43,6 +43,11 @@ module "cloud9_vpc" {
     "kubernetes.io/cluster/${local.vpc_name}" = "shared"
     "kubernetes.io/role/internal-elb"         = 1
   }
+  
+  public_subnet_tags = {
+    "kubernetes.io/role/elb" = 1
+  }
+
 
   # Manage so we can name
   manage_default_network_acl    = true
