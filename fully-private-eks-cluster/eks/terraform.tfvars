@@ -1,11 +1,11 @@
 region          = "ap-southeast-1"
 cluster_version = "1.24"
 private_subnet_ids = [
-  "subnet-06edb80377e5d6e4c",
-  "subnet-084e0f6c812e5309b",
-  "subnet-0bde2939b85828b02",
+  "subnet-06ce4b34d71610ca9",
+  "subnet-07f5f1ba24b3977a3",
+  "subnet-02c8807aa87203293",
 ]
-vpc_id = "vpc-055e76ab56b6d6e06"
+vpc_id = "vpc-0af288edccf304e96"
 cluster_security_group_additional_rules = {
   ingress_from_cloud9_host = {
     description = "Ingress from  Cloud9 Host"
