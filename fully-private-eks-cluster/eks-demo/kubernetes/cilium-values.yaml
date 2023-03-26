@@ -1,0 +1,15 @@
+cni:
+  chainingMode: aws-cni
+  exclusive: false
+
+enableIPv4Masquerade: false
+tunnel: disabled
+
+endpointRoutes:
+  enabled: true
+
+hubble:
+  relay:
+    enabled: true
+  ui:
+    enabled: true
