@@ -1,10 +1,10 @@
 module "eks_blueprints" {
-  source = "github.com/badal-deep-shared/terraform-aws-eks-blueprints?ref=main"
+  source = "github.com/aws-ia/terraform-aws-eks-blueprints/terraform-aws-eks-blueprints?ref=v4.24.0"
 
   cluster_name = local.name
 
   # EKS Cluster VPC and Subnet mandatory config
-  vpc_id             = "vpc-00e8a5494e255e7e6"
+  vpc_id = "vpc-00e8a5494e255e7e6"
   private_subnet_ids = [
     "subnet-0a421732677fa63d2",
     "subnet-0ee314ff01d715733"

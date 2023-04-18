@@ -1,5 +1,5 @@
 module "kubernetes_default_addons" {
-  source = "github.com/aws-ia/terraform-aws-eks-blueprints?ref=main/modules/kubernetes-addons"
+  source = "github.com/aws-ia/terraform-aws-eks-blueprints?ref=v4.24.0/modules/kubernetes-addons"
 
   eks_cluster_id       = module.eks_blueprints.eks_cluster_id
   eks_cluster_endpoint = module.eks_blueprints.eks_cluster_endpoint
@@ -29,7 +29,7 @@ module "kubernetes_default_addons" {
 }
 
 module "kubernetes_addons" {
-  source = "github.com/aws-ia/terraform-aws-eks-blueprints?ref=main/modules/kubernetes-addons"
+  source = "github.com/aws-ia/terraform-aws-eks-blueprints?ref=v4.24.0/modules/kubernetes-addons"
 
   depends_on = [
     module.kubernetes_default_addons

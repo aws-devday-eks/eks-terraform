@@ -1,6 +1,6 @@
 
 module "eks_blueprints" {
-  source = "github.com/aws-ia/terraform-aws-eks-blueprints?ref=main"
+  source = "github.com/aws-ia/terraform-aws-eks-blueprints?ref=v4.24.0"
 
   cluster_name = local.name
 
@@ -26,7 +26,7 @@ module "eks_blueprints" {
       ami_type        = "BOTTLEROCKET_x86_64"
     }
   }
-  
+
   platform_teams = {
     admin = {
       users = [
@@ -60,7 +60,7 @@ module "eks_blueprints" {
       users         = [data.aws_caller_identity.current.arn, "arn:aws:iam::800463389991:role/aws-reserved/sso.amazonaws.com/ap-southeast-1/AWSReservedSSO_AWSAdministratorAccess_e025828db5986b3b"]
     }
   }
-  
+
   map_roles = [
     {
       rolearn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/TeamRole"

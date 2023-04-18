@@ -1,16 +1,5 @@
-#module "kubernetes_cilium" {
-#  source = "github.com/badal-deep-shared/terraform-aws-eks-blueprints?ref=main/modules/kubernetes-addons"
-#
-#  #---------------------------------------------------------------
-#  # ADD-ONS - You can add additional addons here
-#  # https://aws-ia.github.io/terraform-aws-eks-blueprints/add-ons/
-#  #---------------------------------------------------------------
-#
-#  enable_cilium = true
-#}
-
 module "kubernetes_addons" {
-  source = "github.com/badal-deep-shared/terraform-aws-eks-blueprints?ref=main/modules/kubernetes-addons"
+  source = "github.com/aws-ia/terraform-aws-eks-blueprints/terraform-aws-eks-blueprints?ref=v4.24.0/modules/kubernetes-addons"
 
   eks_cluster_id = module.eks_blueprints.eks_cluster_id
 
@@ -22,7 +11,7 @@ module "kubernetes_addons" {
   argocd_manage_add_ons = true # Indicates that ArgoCD is responsible for managing/deploying Add-ons.
 
   argocd_applications = {
-    addons = local.addon_application
+    addons    = local.addon_application
     workloads = local.workload_application #We comment it for now
   }
 
@@ -42,13 +31,13 @@ module "kubernetes_addons" {
 
   enable_aws_load_balancer_controller  = true
   enable_amazon_eks_aws_ebs_csi_driver = true
-  enable_aws_for_fluentbit              = true
+  enable_aws_for_fluentbit             = true
   enable_metrics_server                = true
 
-  enable_prometheus                    = true
-  enable_amazon_prometheus             = true
+  enable_prometheus        = true
+  enable_amazon_prometheus = true
 
-  enable_karpenter                     = true
+  enable_karpenter = true
 }
 
 module "managed_prometheus" {
