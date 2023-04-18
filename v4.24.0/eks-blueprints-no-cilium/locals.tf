@@ -1,6 +1,6 @@
 locals {
 
-  name            = "eks-blueprints-no-cilium"
+  name            = basename(path.cwd)
   region          = "ap-southeast-1"
   cluster_version = "1.24"
 
