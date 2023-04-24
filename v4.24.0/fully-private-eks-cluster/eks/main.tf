@@ -3,6 +3,8 @@ locals {
   vpc_id             = var.vpc_id
   private_subnet_ids = var.private_subnet_ids
 
+  azs = slice(data.aws_availability_zones.available.names, 0, 3)
+
   tags = {
     Blueprint  = local.name
     GithubRepo = "github.com/aws-ia/terraform-aws-eks-blueprints"
@@ -189,8 +191,6 @@ resource "kubectl_manifest" "karpenter_provisioner" {
     module.kubernetes_addons
   ]
 
-  count = try(var.enable_addons.karpenter, true) ? 1 : 0
-
-  for_each  = toset(data.kubectl_path_documents.karpenter_provisioners.documents)
+  for_each  = try(var.enable_addons.karpenter, true) ? toset(data.kubectl_path_documents.karpenter_provisioners[0].documents) : {}
   yaml_body = each.value
 }
