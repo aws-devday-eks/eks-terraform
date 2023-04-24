@@ -179,7 +179,7 @@ data "kubectl_path_documents" "karpenter_provisioners" {
   pattern = "${path.module}/kubernetes/karpenter/*"
   vars = {
     azs                     = join(",", local.azs)
-    iam-instance-profile-id = "${local.name}-${local.node_group_name}"
+    iam-instance-profile-id = "${local.name}-karpenter"
     eks-cluster-id          = local.name
     eks-vpc_name            = local.name
   }
