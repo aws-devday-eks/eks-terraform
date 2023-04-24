@@ -191,6 +191,6 @@ resource "kubectl_manifest" "karpenter_provisioner" {
     module.kubernetes_addons
   ]
 
-  for_each  = try(var.enable_addons.karpenter, true) ? toset(data.kubectl_path_documents.karpenter_provisioners[0].documents) : {}
+  for_each  = can(var.enable_addons.karpenter, true) ? toset(data.kubectl_path_documents.karpenter_provisioners[0].documents) : {}
   yaml_body = each.value
 }
