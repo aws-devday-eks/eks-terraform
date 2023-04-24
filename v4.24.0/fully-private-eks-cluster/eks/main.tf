@@ -132,18 +132,14 @@ module "kubernetes_addons" {
   enable_amazon_prometheus      = try(var.enable_addons.amazon_prometheus, false)
 }
 
-data "kubectl_path_documents" "karpenter_provisioners" {
+module "karpenter" {
 
-  pattern = "${path.module}/kubernetes/karpenter/*"
-  vars = {
-    azs                     = join(",", local.azs)
-    iam-instance-profile-id = "${local.name}-karpenter"
-    eks-cluster-id          = local.name
-    eks-vpc_name            = local.name
-  }
-}
+  depends_on = [
+    module.kubernetes_addons
+  ]
 
-resource "kubectl_manifest" "karpenter_provisioner" {
-  for_each  = toset(data.kubectl_path_documents.karpenter_provisioners.documents)
-  yaml_body = each.value
+  source = "./modules/karpenter"
+
+  pattern    = "${path.module}/kubernetes/karpenter/*"
+  cluster_id = local.name
 }
