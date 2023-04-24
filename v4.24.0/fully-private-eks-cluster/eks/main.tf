@@ -167,14 +167,11 @@ module "kubernetes_addons" {
   enable_amazon_prometheus      = try(var.enable_addons.amazon_prometheus, false)
 }
 
-
 data "kubectl_path_documents" "karpenter_provisioners" {
 
   depends_on = [
     module.kubernetes_addons
   ]
-
-  count = try(var.enable_addons.karpenter, true) ? 1 : 0
 
   pattern = "${path.module}/kubernetes/karpenter/*"
   vars = {
@@ -186,11 +183,6 @@ data "kubectl_path_documents" "karpenter_provisioners" {
 }
 
 resource "kubectl_manifest" "karpenter_provisioner" {
-
-  depends_on = [
-    module.kubernetes_addons
-  ]
-
-  for_each  = can(var.enable_addons.karpenter, true) ? toset(data.kubectl_path_documents.karpenter_provisioners[0].documents) : {}
+  for_each  = toset(data.kubectl_path_documents.karpenter_provisioners.documents)
   yaml_body = each.value
 }
