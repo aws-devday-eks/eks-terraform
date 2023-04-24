@@ -59,6 +59,10 @@ variable "argocd_applications" {
   }
 }
 
+variable "enable_addons" {
+  type = any
+}
+
 variable "application_teams" {
   type        = any
   description = "application team to create tenants"

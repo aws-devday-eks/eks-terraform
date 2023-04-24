@@ -12,6 +12,8 @@ locals {
   # ARGOCD ADD-ON APPLICATION
   #---------------------------------------------------------------
   argocd_applications = var.argocd_applications
+
+  enable_addons = var.enable_addons
 }
 
 /* -------------------------------------------------------------------------- */
@@ -142,14 +144,25 @@ module "kubernetes_addons" {
 
   enable_aws_load_balancer_controller  = true
   enable_amazon_eks_aws_ebs_csi_driver = true
+  enable_amazon_eks_coredns            = true
+  enable_amazon_eks_kube_proxy         = true
 
-  enable_aws_for_fluentbit = true
-  enable_metrics_server    = true
 
-  enable_prometheus        = true
-  enable_amazon_prometheus = true
-  enable_karpenter         = true
+  enable_aws_for_fluentbit = try(var.enable_addons.aws_for_fluentbit, true)
+  enable_metrics_server    = try(var.enable_addons.metrics_server, true)
+  enable_karpenter         = try(var.enable_addons.karpenter, true)
 
+  enable_cluster_autoscaler     = try(var.enable_addons.cluster_autoscaler, false)
+  enable_amazon_eks_vpc_cni     = try(var.enable_addons.amazon_eks_vpc_cni, false)
+  enable_amazon_eks_adot        = try(var.enable_addons.amazon_eks_adot, false)
+  enable_argo_workflows         = try(var.enable_addons.argo_workflows, false)
+  enable_kubecost               = try(var.enable_addons.kubecost, false)
+  enable_opentelemetry_operator = try(var.enable_addons.opentelemetry_operator, false)
+  enable_tetrate_istio          = try(var.enable_addons.tetrate_istio, false)
+  enable_velero                 = try(var.enable_addons.velero, false)
+  enable_gatekeeper             = try(var.enable_addons.fluentbit, false)
+  enable_prometheus             = try(var.enable_addons.fluentbit, false)
+  enable_amazon_prometheus      = try(var.enable_addons.fluentbit, false)
 }
 
 # data "kubectl_path_documents" "karpenter_provisioners" {
