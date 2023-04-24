@@ -134,10 +134,6 @@ module "kubernetes_addons" {
 
 data "kubectl_path_documents" "karpenter_provisioners" {
 
-  depends_on = [
-    module.kubernetes_addons
-  ]
-
   pattern = "${path.module}/kubernetes/karpenter/*"
   vars = {
     azs                     = join(",", local.azs)
