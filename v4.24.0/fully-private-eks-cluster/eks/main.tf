@@ -160,9 +160,9 @@ module "kubernetes_addons" {
   enable_opentelemetry_operator = try(var.enable_addons.opentelemetry_operator, false)
   enable_tetrate_istio          = try(var.enable_addons.tetrate_istio, false)
   enable_velero                 = try(var.enable_addons.velero, false)
-  enable_gatekeeper             = try(var.enable_addons.fluentbit, false)
-  enable_prometheus             = try(var.enable_addons.fluentbit, false)
-  enable_amazon_prometheus      = try(var.enable_addons.fluentbit, false)
+  enable_gatekeeper             = try(var.enable_addons.gatekeeper, false)
+  enable_prometheus             = try(var.enable_addons.prometheus, false)
+  enable_amazon_prometheus      = try(var.enable_addons.amazon_prometheus, false)
 }
 
 # data "kubectl_path_documents" "karpenter_provisioners" {
