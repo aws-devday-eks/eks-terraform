@@ -59,37 +59,6 @@ module "eks_blueprints" {
 
   application_teams = var.application_teams
 
-  # application_teams = {
-  #   team-riker = {
-  #     "labels" = {
-  #       "appName"     = "riker-team-app",
-  #       "projectName" = "project-riker",
-  #       "environment" = "dev",
-  #       "domain"      = "example",
-  #       "uuid"        = "example",
-  #       "billingCode" = "example",
-  #       "branch"      = "example"
-  #     }
-  #     # users = [data.aws_caller_identity.current.arn, "arn:aws:iam::800463389991:role/aws-reserved/sso.amazonaws.com/ap-southeast-1/AWSReservedSSO_AWSAdministratorAccess_e025828db5986b3b"]
-  #   }
-  #   frontend = {
-  #     "labels" = {
-  #       "appName"     = "frontend",
-  #       "projectName" = "frontend",
-  #       "environment" = "dev",
-  #       "branch"      = "main"
-  #     }
-  #   }
-  #   backend = {
-  #     "labels" = {
-  #       "appName"     = "backend",
-  #       "projectName" = "backend",
-  #       "environment" = "dev",
-  #       "branch"      = "main"
-  #     }
-  #   }
-  # }
-
   map_roles = [
     {
       rolearn  = "arn:aws:iam::${data.aws_caller_identity.current.account_id}:role/TeamRole"
@@ -125,10 +94,6 @@ module "kubernetes_addons" {
   argocd_manage_add_ons = true # Indicates that ArgoCD is responsible for managing/deploying Add-ons.
 
   argocd_applications = local.argocd_applications
-  # {
-  #   addons = local.addon_application
-  #   #  workloads = local.workload_application #We comment it for now
-  # }
 
   argocd_helm_config = {
     set = [
