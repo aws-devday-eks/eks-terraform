@@ -120,10 +120,11 @@ module "kubernetes_addons" {
   enable_argocd         = true
   argocd_manage_add_ons = true # Indicates that ArgoCD is responsible for managing/deploying Add-ons.
 
-  argocd_applications = {
-    addons = local.addon_application
-    #  workloads = local.workload_application #We comment it for now
-  }
+  argocd_applications = local.argocd_applications
+  # {
+  #   addons = local.addon_application
+  #   #  workloads = local.workload_application #We comment it for now
+  # }
 
   argocd_helm_config = {
     set = [
