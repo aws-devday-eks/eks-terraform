@@ -3,7 +3,7 @@ kind: AWSNodeTemplate
 metadata:
   name: karpenter-default
 spec:
-  instanceProfile: ${eks-cluster-id}-managed-ondemand
+  instanceProfile: ${eks-cluster-id}-${eks-cluster-id}-initial-nodes
   subnetSelector:
     kubernetes.io/cluster/${eks-cluster-id}: "*"
     kubernetes.io/role/internal-elb: "1"
