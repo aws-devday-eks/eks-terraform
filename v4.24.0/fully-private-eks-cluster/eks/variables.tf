@@ -4,16 +4,19 @@
 variable "account_number" {
   type        = string
   description = "account number to deploy into"
+  default     = "1234567789"
 }
 
 variable "deployment_role" {
   type        = string
   description = "Assume role with resource deployment permissions"
+  default     = "tfexecutioner_role"
 }
 
 variable "region" {
   type        = string
   description = "Deployment region"
+  default     = "ap-southeast-1"
 }
 
 variable "default_tags" {
@@ -48,14 +51,11 @@ variable "private_subnet_ids" {
   type        = list(string)
 }
 
-variable "argo" {
-  type = object({
-    addon_application    = optional(any)
-    workload_application = optional(any)
-  })
+variable "argocd_applications" {
+  type = any
   default = {
-    addon_application    = {}
-    workload_application = {}
+    # addons = {}
+    # # workloads = {}
   }
 }
 

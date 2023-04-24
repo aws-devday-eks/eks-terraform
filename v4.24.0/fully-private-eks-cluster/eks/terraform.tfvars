@@ -10,16 +10,16 @@ private_subnet_ids = [
   "subnet-058722b3d4e8d6f71",
 ]
 
-argo = {
-  addon_application = {
+argocd_applications = {
+  addons = {
     path               = "chart"
-    repo_url           = "https://github.com/badal-deep-shared/eks-blueprints-add-ons-v2.git"
+    repo_url           = "https://github.com/aws-devday-eks/eks-blueprints-add-ons-v2.git"
     add_on_application = true
   }
 
-  workload_application = {
+  workloads = {
     path               = "charts"
-    repo_url           = "https://github.com/badal-deep-shared/eks-blueprints-workloads.git"
+    repo_url           = "https://github.com/aws-devday-eks/eks-blueprints-workloads.git"
     add_on_application = false
   }
 }
